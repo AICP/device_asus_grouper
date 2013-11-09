@@ -19,3 +19,9 @@ ro.device.gpu=ULP GeForce
 ro.device.rear_cam=None
 ro.device.front_cam=1.2 MP
 ro.device.screen_res=800x1280
+
+# don't preload OpenGL in Zygote, the Tegra drivers do not like it
+ro.zygote.disable_gl_preload=true
+
+# configure PRISM
+persist.tegra.didim.video = 5
