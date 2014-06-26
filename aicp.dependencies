@@ -5,9 +5,9 @@
     "branch":      "cm-11.0"
   },
   {
-   "repository":  "SlimRoms/proprietary_vendor_asus",
+   "repository":  "AICP/proprietary_vendor_asus",
    "target_path": "vendor/asus",
-   "branch":      "kk4.4"
+   "branch":      "kitkat"
   },
   {
    "repository":  "SlimRoms/proprietary_vendor_broadcom",
