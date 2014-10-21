@@ -46,7 +46,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
     device/asus/grouper/ueventd.grouper.rc:root/ueventd.grouper.rc \
     device/asus/grouper/init.grouper.usb.rc:root/init.grouper.usb.rc \
-    device/asus/grouper/gps.conf:system/etc/gps.conf
+    device/asus/grouper/gps.conf:system/etc/gps.conf \
+    device/asus/grouper/touch_fw_update.sh:system/bin/touch_fw_update.sh
 
 ifneq ($(TARGET_PREBUILT_WIFI_MODULE),)
 PRODUCT_COPY_FILES += \
