@@ -87,3 +87,5 @@ TARGET_KERNEL_SOURCE := kernel/asus/grouper
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 BOARD_SEPOLICY_DIRS += device/asus/grouper/sepolicy
+
+PRODUCT_PROPERTY_OVERRIDES += ro.config.low_ram=true
