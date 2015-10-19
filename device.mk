@@ -15,7 +15,8 @@
 #
 
 PRODUCT_PROPERTY_OVERRIDES := \
-    ro.carrier=wifi-only
+    ro.carrier=wifi-only \
+    ro.config.low_ram=true
 
 PRODUCT_COPY_FILES := \
     device/asus/grouper/fstab.grouper:root/fstab.grouper \
@@ -29,9 +30,6 @@ $(call inherit-product-if-exists, vendor/asus/grouper/device-vendor.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.carrier=wifi-only
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.low_ram=true
 
 DEVICE_PACKAGE_OVERLAYS := \
     device/asus/grouper/overlay
