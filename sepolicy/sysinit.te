@@ -1,0 +1,5 @@
+allow sysinit userinit_exec:file { getattr execute read open execute_no_trans };
+allow sysinit property_socket:sock_file write;
+allow sysinit system_data_file:file { open };
+allow sysinit init:unix_stream_socket connectto;
+allow sysinit sysfs:file write;
