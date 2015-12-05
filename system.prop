@@ -36,4 +36,7 @@ ro.config.max_starting_bg=3
 persist.android.strictmode=0
 
 # 16bit Transparency
-persist.sys.use_16bpp_alpha=0
+persist.sys.use_16bpp_alpha=1
+
+#config low ram device
+ro.config.low_ram=true
