@@ -21,6 +21,13 @@
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/asus/grouper/device.mk)
+$(call inherit-product, vendor/asus/grouper/asus-vendor.mk)
+$(call inherit-product, vendor/broadcom/grouper/broadcom-vendor.mk)
+$(call inherit-product, vendor/elan/grouper/elan-vendor.mk)
+$(call inherit-product, vendor/invensense/grouper/invensense-vendor.mk)
+$(call inherit-product, vendor/nvidia/grouper/nvidia-vendor.mk)
+$(call inherit-product, vendor/nxp/grouper/nxp-vendor.mk)
+$(call inherit-product, vendor/widevine/grouper/widevine-vendor.mk)
 # This is where we'd set a backup provider if we had one
 #$(call inherit-product, device/sample/products/backup_overlay.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
