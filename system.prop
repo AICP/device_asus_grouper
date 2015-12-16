@@ -40,3 +40,9 @@ persist.sys.use_16bpp_alpha=1
 
 #config low ram device
 ro.config.low_ram=true
+
+#debug flags
+ro.adb.secure=0
+ro.debuggable=1
+persist.sys.usb.config=mtp,adb
+
