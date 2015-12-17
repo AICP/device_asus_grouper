@@ -11,3 +11,5 @@ allow system_server sensors_data_file:file r_file_perms;
 
 #text relocs
 allow system_server system_file:file execmod;
+allow system_server sysfs_devices_tegradc:dir search;
+allow system_server sysfs_devices_tegradc:file { read write getattr open };
