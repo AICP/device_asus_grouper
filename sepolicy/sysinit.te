@@ -1,4 +1,8 @@
-allow sysinit userinit_exec:file { getattr execute read open execute_no_trans };
+type sysinit, domain;
+type sysinit_exec, exec_type, file_type;
+
+init_daemon_domain(sysinit)
+
 allow sysinit property_socket:sock_file write;
 allow sysinit system_data_file:file { open };
 allow sysinit init:unix_stream_socket connectto;
