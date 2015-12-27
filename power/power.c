@@ -32,9 +32,7 @@
 #include <hardware/hardware.h>
 #include <hardware/power.h>
 
-#define CPUQUIET_DISABLE_LP_CLUSTER "/sys/devices/system/cpu/cpuquiet/tegra_cpuquiet/no_lp"
-#define CPUQUIET_CORE_LOCKER "/sys/devices/system/cpu/cpuquiet/balanced/core_lock_trigger"
-#define CPUFREQ_BOOSTPULSE "/sys/devices/system/cpu/cpufreq/interactive/boostpulse" 
+#define BOOST_PATH      "/sys/devices/system/cpu/cpufreq/interactive/boost"
 #define UEVENT_MSG_LEN 2048
 #define TOTAL_CPUS 4
 #define RETRY_TIME_CHANGING_FREQ 20
@@ -184,9 +182,8 @@ static void uevent_init()
 static void grouper_power_init( __attribute__((unused)) struct power_module *module)
 {
     /*
-     * cpufreq interactive governor: timer 50ms, min sample 500ms,
-     * speed <=1GHz below 45% load or >=1GHz at load 65% until 1.1GHz while load<75%
-     * hispeed >=1.2GHz at load 75%
+     * cpufreq interactive governor: timer 20ms, min sample 100ms,
+     * hispeed 700MHz at load 40%
      */
 
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate",
@@ -195,47 +192,27 @@ static void grouper_power_init( __attribute__((unused)) struct power_module *mod
                 "500000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load",
                 "75");
-    sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay",
-                "20000");
-    sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq",
-                "1300000");
-    sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/target_loads",
-                "45 1000000:65 1100000:75");
-    sysfs_write("/sys/devices/system/cpu/cpufreq/cpuload/enable",
-                "1");
-    sysfs_write("/sys/devices/system/cpu/cpuquiet/tegra_cpuquiet/enable",
-                "1");
-    sysfs_write("/sys/devices/system/cpu/cpuquiet/balanced/core_lock_period",
-                "3000000");
-    sysfs_write("/sys/devices/system/cpu/cpuquiet/balanced/core_lock_count",
-                "2");
-    sysfs_write("/sys/devices/system/cpu/cpuquiet/balanced/core_lock_trigger",
-                "1");
-    sysfs_write(CPUQUIET_DISABLE_LP_CLUSTER,
-                "0");
-    sysfs_write("/sys/module/cpuidle/parameters/power_down_in_idle",
-                "0");
-    sysfs_write("/sys/module/cpuidle_t3/parameters/lp2_0_in_idle",
-                "0");
-    sysfs_write("/sys/module/cpuidle_t3/parameters/lp2_n_in_idle",
-                "1");
+    sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/boost_factor",
+		"0");
+    sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/input_boost",
+		"1");
     uevent_init();
 }
 
-static void grouper_power_set_interactive(struct power_module *module __unused, int on)
+static void grouper_power_set_interactive(__attribute__((unused)) struct power_module *module,
+                                          __attribute__((unused)) int on)
 {
 	if (on) {
-		sysfs_write(CPUQUIET_CORE_LOCKER, "1");
-		sysfs_write(CPUQUIET_DISABLE_LP_CLUSTER, "1");
 		sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load", "75");
-		sysfs_write("/sys/devices/system/cpu/cpuquiet/balanced/core_lock_period", "3000000");
-		sysfs_write("/sys/devices/system/cpu/cpuquiet/balanced/core_lock_count", "2");
-	} else {
-		sysfs_write(CPUQUIET_CORE_LOCKER, "0");
-		sysfs_write(CPUQUIET_DISABLE_LP_CLUSTER, "0");
+		sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/core_lock_period", "3000000");
+		sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/core_lock_count", "2");
+		sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/input_boost", "1");
+	}
+	else {
 		sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load", "85");
-		sysfs_write("/sys/devices/system/cpu/cpuquiet/balanced/core_lock_period", "200000");
-		sysfs_write("/sys/devices/system/cpu/cpuquiet/balanced/core_lock_count", "0");
+		sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/core_lock_period", "200000");
+		sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/core_lock_count", "0");
+		sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/input_boost", "0");
 	}
 }
 
@@ -246,13 +223,12 @@ static void grouper_power_hint(__attribute__((unused)) struct power_module *modu
     int len, cpu, ret;
 
     switch (hint) {
-    case POWER_HINT_INTERACTION:
-        sysfs_write(CPUFREQ_BOOSTPULSE, "1");
+    case POWER_HINT_VSYNC:
         break;
+
     case POWER_HINT_LOW_POWER:
         pthread_mutex_lock(&low_power_mode_lock);
         if (data) {
-            sysfs_write(CPUQUIET_CORE_LOCKER, "0");
             low_power_mode = true;
             for (cpu = 0; cpu < TOTAL_CPUS; cpu++) {
                 sysfs_write(cpu_path_min[cpu], LOW_POWER_MIN_FREQ);
@@ -262,7 +238,6 @@ static void grouper_power_hint(__attribute__((unused)) struct power_module *modu
                 }
             }
         } else {
-            sysfs_write(CPUQUIET_CORE_LOCKER, "1");
             low_power_mode = false;
             for (cpu = 0; cpu < TOTAL_CPUS; cpu++) {
                 ret = sysfs_write(cpu_path_max[cpu], NORMAL_MAX_FREQ);
