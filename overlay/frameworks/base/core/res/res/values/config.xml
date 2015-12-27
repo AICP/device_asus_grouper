@@ -241,6 +241,9 @@
     <!-- Set lowmemorykiller threshold -->
     <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">16384</integer>
 
+    <!-- Enable doze powersaving -->
+    <bool name="config_enableAutoPowerModes">true</bool>
+
     <string-array name="config_locationProviderPackageNames" translatable="false">
         <!-- GMS location provider -->
         <item>com.google.android.gms</item>
