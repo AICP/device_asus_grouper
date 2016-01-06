@@ -26,6 +26,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
     persist.sys.media.legacy-drm=true \
     drm.service.enabled=true
 
+# disable Captive portal check
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.disable_captive_portal=1
+
 # libhwui flags
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.render_dirty_regions=false
