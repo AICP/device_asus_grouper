@@ -111,6 +111,11 @@ PRODUCT_PACKAGES += \
     e2fsck \
     setup_fs
 
+# IPv6 tethering
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes
+
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
 # we have enough storage space to hold precise GC data
