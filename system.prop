@@ -20,3 +20,10 @@ persist.tegra.didim.video = 5
 
 #AICP Device Maintainers
 ro.aicp.maintainer=zipsnet, semdoc (doc HD)
+
+# grouper Hardware Info
+ro.device.chipset=Nvidia Tegra 3
+ro.device.cpu=Quad-core 1.2 GHz Cortex-A9
+ro.device.gpu=ULP GeForce
+ro.device.front_cam=1.2 MP
+ro.device.screen_res=800x1280
