@@ -94,6 +94,7 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.r_submix.default \
     librs_jni \
+    libemoji \
     l2ping \
     hcitool \
     bttest \
