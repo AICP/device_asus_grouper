@@ -43,6 +43,9 @@ PRODUCT_COPY_FILES += \
     device/asus/grouper/gps/gps.xml:system/etc/gps.xml \
     device/asus/grouper/touch_fw_update.sh:system/bin/touch_fw_update.sh
 
+PRODUCT_PACKAGES += \
+    libstlport
+
 ifneq ($(TARGET_PREBUILT_WIFI_MODULE),)
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_WIFI_MODULE):system/lib/modules/bcm4329.ko
