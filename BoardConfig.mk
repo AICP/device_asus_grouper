@@ -38,7 +38,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/asus/grouper
 -include vendor/asus/grouper/BoardConfigVendor.mk
 include device/asus/grouper/BoardConfigCommon.mk
 
-TARGET_NO_RECOVERY = true
+#TARGET_NO_RECOVERY = true
 TARGET_RECOVERY_FSTAB = device/asus/grouper/fstab.grouper
 
 #BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 1
