@@ -1,9 +1,12 @@
-allow init kernel:security load_policy;
-allow init diag_device:chr_file unlink;
-allow init tmpfs:lnk_file create_file_perms;
-allow init fuse_device:chr_file getattr;
-allow init loop_device:blk_file write;
-allow init procrank_exec:file { read getattr open };
-allow init property_socket:sock_file write;
-allow init self:rawip_socket { getopt create setopt };
+## Kernel bug for Linux < 3.3: sysfs inodes can lose their security context
+## and revert to the base sysfs type.
+allow init sysfs:file write;
 
+allow init debugfs:dir mounton;
+allow init logd:dir { getattr };
+
+allow init sysfs_firmware_writable:file w_file_perms;
+
+allow init sysfs_devices_tegradc:lnk_file { read };
+
+allow init debugfs:file w_file_perms;
