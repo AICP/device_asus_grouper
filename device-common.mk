@@ -33,6 +33,12 @@ PRODUCT_PROPERTY_OVERRIDES := \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.disable_captive_portal=1
 
+# ART
+PRODUCT_PROPERTY_OVERRIDES += \
+		dalvik.vm.dex2oat-flags=--no-watch-dog \
+		dalvik.vm.dex2oat-swap=false \
+		ro.sys.fw.dex2oat_thread_count=5
+
 # libhwui flags
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.render_dirty_regions=false

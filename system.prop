@@ -20,15 +20,17 @@ persist.tegra.didim.video = 5
 persist.tegra.didim.enable = 1
 persist.tegra.didim.normal = 3
 # Dalvik and other tweaks
+dalvik.vm.heapgrowthlimit=128m
+dalvik.vm.heapsize=174m
 dalvik.vm.verify-bytecode=false
 persist.adb.notify=0
 ro.kernel.android.checkjni=0
 ro.kernel.checkjni=0
-dalvik.vm.checkjni=true
+dalvik.vm.checkjni=false
 ro.ril.disable.power.collapse=0
 pm.sleep_mode=1
 ro.config.hw_power_saving=true
-ro.sys.fw.bg_apps_limit=6
+ro.sys.fw.bg_apps_limit=10
 persist.debug.wfd.enable=1
 persist.sys.force_highendgfx=true
 config.disable_atlas=true
@@ -41,7 +43,7 @@ persist.android.strictmode=0
 persist.sys.use_16bpp_alpha=1
 
 #config low ram device
-ro.config.low_ram=true
+#ro.config.low_ram=true
 
 #disable scrolling cache (1 = on, 2 = sometimes on, 3 = sometimes off, 4 = allways off)
 persist.sys.scrollingcache=4
