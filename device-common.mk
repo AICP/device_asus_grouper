@@ -98,6 +98,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libdgv1
 
+# Widevine
+PRODUCT_PACKAGES += \
+    libshim_wvm
+
 PRODUCT_PACKAGES += \
     sensors-config \
     lights.grouper \
