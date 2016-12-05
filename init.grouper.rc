@@ -4,8 +4,6 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
 
 on init
-    export LD_LIBRARY_PATH /vendor/lib:/system/lib
-    export LD_SHIM_LIBS "/system/vendor/lib/libwvm.so|libshim_wvm.so"
     symlink /sdcard /storage/sdcard0
 
 on early-boot
@@ -295,7 +293,6 @@ on boot
     start touch_fw_update
 
 # initialize KSM
-    write /sys/kernel/mm/ksm/deferred_timer 1
     write /sys/kernel/mm/ksm/pages_to_scan 100
     write /sys/kernel/mm/ksm/sleep_millisecs 500
     write /sys/kernel/mm/ksm/run 1
