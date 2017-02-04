@@ -17,6 +17,10 @@
 
 import common
 
+def FullOTA_InstallBegin(info):
+  info.script.FormatPartition("/system")
+  info.script.TunePartition("/system", "-O", "^has_journal")
+
 def FullOTA_InstallEnd(info):
   try:
     bootloader_bin = info.input_zip.read("RADIO/bootloader.raw")
