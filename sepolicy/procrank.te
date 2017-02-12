@@ -5,7 +5,7 @@ userdebug_or_eng(`
   type procrank, domain, mlstrustedsubject;
 
   domain_auto_trans(shell, procrank_exec, procrank)
-  allow procrank self:capability sys_ptrace;
+#  allow procrank self:capability sys_ptrace;
   allow procrank devpts:chr_file { read write getattr ioctl };
   r_dir_file(procrank, domain)
   allow procrank shell:fd use;
