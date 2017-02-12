@@ -15,7 +15,7 @@ on early-boot
 on fs
     setprop ro.crypto.umount_sd false
     mount_all /fstab.grouper
-#    swapon_all /fstab.grouper
+    swapon_all /fstab.grouper
 
 on post-fs-data
     # change back to bluetooth from system
