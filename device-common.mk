@@ -57,7 +57,8 @@ PRODUCT_COPY_FILES += \
     device/asus/grouper/set_hwui_params.sh:system/bin/set_hwui_params.sh
 
 PRODUCT_PACKAGES += \
-    libstlport
+    libstlport \
+    libnvossh
 
 ifneq ($(TARGET_PREBUILT_WIFI_MODULE),)
 PRODUCT_COPY_FILES += \
