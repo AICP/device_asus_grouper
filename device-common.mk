@@ -174,6 +174,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libstagefrighthw
 
+PRODUCT_PACKAGES += \
+    PerformanceControl
+
 WIFI_BAND := 802_11_BG
 PRODUCT_DEFAULT_WIFI_CHANNELS := 13
 
