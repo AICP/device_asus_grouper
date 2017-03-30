@@ -252,7 +252,7 @@
     <integer name="config_safe_media_volume_index">6</integer>
 
     <!-- Set lowmemorykiller threshold -->
-    <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">-1</integer>
+    <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">65536</integer>
     <integer name="config_lowMemoryKillerMinFreeKbytesAdjust">0</integer>
 
     <!-- Enable doze powersaving -->
