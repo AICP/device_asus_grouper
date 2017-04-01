@@ -7,4 +7,6 @@ allow zygote self:capability sys_nice;
 allow zygote self:process execmem;
 allow zygote system_server:binder { call transfer };
 allow zygote zygote_tmpfs:file execute;
-
+allow zygote system_data_file:dir write;
+allow zygote system_data_file:dir add_name;
+allow zygote system_data_file:dir create;
