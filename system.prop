@@ -4,6 +4,7 @@ rild.libpath=/system/lib/libril-icera.so
 rild.libargs=-e wwan0
 persist.tegra.nvmmlite = 1
 ro.audio.monitorOrientation=true
+net.tethering.noprovisioning=true
 
 #NFC
 debug.nfc.fw_download=false
@@ -63,3 +64,4 @@ persist.service.adb.enable=1
 persist.sys.usb.config=mtp,adb
 
 ro.opa.eligible_device=true
+
