@@ -11,3 +11,4 @@ allow zygote system_data_file:dir write;
 allow zygote system_data_file:dir add_name;
 allow zygote system_data_file:dir create;
 allow zygote system_data_file:dir setattr;
+allow zygote sysfs_module_fuse:file read;
